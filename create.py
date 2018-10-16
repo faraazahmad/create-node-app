@@ -1,3 +1,5 @@
+from subprocess import call
+
 # get app name
 def get_app_name():
     app_name = input("Enter app name: ")
@@ -73,4 +75,7 @@ def get_stylesheet_engine():
     return stylesheet_string
 
 # run `express ..` with arguments
-print("express {} {} {} --git".format(get_view_engine(), get_stylesheet_engine(), get_app_name()))
+final_command = "express {} {} {} --git".format(get_view_engine(), get_stylesheet_engine(), get_app_name())
+
+# execute the shell command
+call(final_command)
