@@ -74,8 +74,11 @@ def get_stylesheet_engine():
 
     return stylesheet_string
 
-# run `express ..` with arguments
-final_command = "express {} {} {} --git".format(get_view_engine(), get_stylesheet_engine(), get_app_name())
+# generate command with arguments for call() function
+final_command = ["express", "--git", get_view_engine(), get_stylesheet_engine(), get_app_name()]
 
-# execute the shell command
-call(final_command)
+try:
+    # execute the shell command
+    call(final_command)
+except Exception as e:
+    print(e)
