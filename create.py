@@ -8,6 +8,7 @@ def get_app_name():
 # get preferred view engine
 def get_view_engine():
     view_engine_list = [
+        "dust",
         "ejs",
         "hbs",
         "hjs",
@@ -50,7 +51,8 @@ def get_stylesheet_engine():
         "sass",
         "less",
         "stylus",
-        "compass"
+        "compass",
+        "none"
     ]
 
     print("Available stylesheet engines: ")
@@ -62,20 +64,28 @@ def get_stylesheet_engine():
     
     # get choice number
     choice = None
+    stylesheet_string = None
+    length = stylesheet_engine_list.__len__() - 1
     while True:
-        choice = int(input("\nChoose stylesheet engine (1 - {}): ".format(stylesheet_engine_list.__len__())))
-        if choice > 0 and choice < stylesheet_engine_list.__len__():
+        choice = int(input("\nChoose stylesheet engine (1 - {}): ".format(length + 1))) - 1
+        if choice >= 0 and choice < length:
+            stylesheet_string = "--css={}".format(stylesheet_engine_list[choice - 1])
+            break
+        elif choice == length:
+            stylesheet_string = "--css"
             break
         else:
             print("Invalid input.")
-    
-    # generate stylesheet string
-    stylesheet_string = "--css={}".format(stylesheet_engine_list[choice - 1])
 
     return stylesheet_string
 
 # generate command with arguments for call() function
-final_command = ["express", "--git", get_view_engine(), get_stylesheet_engine(), get_app_name()]
+app_name = get_app_name()
+view_engine = get_view_engine()
+stylesheet_engine = get_stylesheet_engine()
+
+# final command for generating node project
+final_command = ["express", "--git", app_name, stylesheet_engine, view_engine]
 
 try:
     # execute the shell command
