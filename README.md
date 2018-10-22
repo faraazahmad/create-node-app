@@ -5,7 +5,7 @@ A python script to create node.js apps with proper project structure and feature
 * Selecting view engine (pug, jade, ejs, hbs etc.)
 * Selecting stylesheet engine (sass, less, stylus etc.)
 * `.gitignore` file for NodeJS
-* *More coming soon*
+* *More(controllers/models) coming soon*
 
 ## Running the script
 
