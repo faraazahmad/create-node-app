@@ -79,16 +79,23 @@ def get_stylesheet_engine():
 
     return stylesheet_string
 
+def run_command(command):
+    try:
+        call(command)
+    except Exception as e:
+        print(e)
+
 # generate command with arguments for call() function
 app_name = get_app_name()
 view_engine = get_view_engine()
 stylesheet_engine = get_stylesheet_engine()
 
 # final command for generating node project
-final_command = ["express", "--git", app_name, stylesheet_engine, view_engine]
+create_project = ["express", "--git", app_name, stylesheet_engine, view_engine]
 
-try:
-    # execute the shell command
-    call(final_command)
-except Exception as e:
-    print(e)
+# execute command to create project
+run_command(create_project)
+
+# Create directories for controllers
+create_controller = ["mkdir", "-p", app_name, "controllers"]
+run_command(create_controller)
